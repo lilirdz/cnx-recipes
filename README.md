@@ -6,22 +6,29 @@
 
 **For Windows Users:** If your username contains whitespace, the setup and installation will not work. Create a new user without whitespace in the username in order to succesfully complete installation.
 
-# Create a baked pdf for a new book
+# BAKE BOOK
 
 1. Run `docker-compose run --rm -e HOST=katalyst01.cnx.org fetch-book --with-resources intro-business` to download the cnxml from the server.
    - **Note:** To see the list of books available see `./books.txt`
 1. Run `docker-compose run --rm assemble-book intro-business` to create the single-file HTML for the book.
    - Exercises are fetched when assembling the book. If the book has exercises that are being fetched from the exercises db, it can take 20+ minutes when first assembling a book. After the first time, it should not take as long
 1. Run `docker-compose run --rm bake-book intro-business` to convert the single-file HTML locally into the "baked" book.
+
+# Create BAKED PDF from BAKED BOOK
+
+Bake a book with the steps from **BAKED BOOK** (above), then do the following:
+
 1. Run `docker-compose run --rm mathify-book intro-business` to convert all the math to svg.
 1. Run `docker-compose run --rm build-pdf intro-business` to create the pdf.
 
-# Create JSON files for a book
+# Create BAKED JSON files from BAKED BOOK
 
-Follow the first few steps above, up to and including the `bake-book` step. Then do the following:
+Bake a book with the steps from **BAKED BOOK** (above), then do the following:
 
 1. Run `docker-compose run --rm disassemble-book intro-business` to split the baked HTML file into mutiple files.
 1. Run `docker-compose run --rm jsonify-book intro-business` to create JSON files for each Baked Page.
+
+
 
 
 ## Run scripts
